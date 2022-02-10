@@ -2,6 +2,7 @@ import React from 'react';
 // import { FC } from "react"
 
 import Todo from '../models/todo'; // class Todoの追加
+import TodoItem from '../components/TodoItem';
 
 // type Todos
 // ----------------------------------------- //
@@ -17,9 +18,12 @@ const Todos: React.FC<{ items: Todo[] }> = (props) => {
     <ul>
       {props.items.map((item) => (
         // <li key={item}>{item}</li> // class Todoの追加による変更
-        <li key={item.id}>
-          {item.text} | {item.id}
-        </li>
+
+        // <li key={item.id}>
+        //   {item.text} | {item.id}
+        // </li>
+
+        <TodoItem key={item.id} text={item.text} id={item.id} />
       ))}
     </ul>
   );
