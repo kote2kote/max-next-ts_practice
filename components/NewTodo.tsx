@@ -1,28 +1,28 @@
+// useRef => input.value取り出し
 import { useRef, useContext } from 'react';
+// 状態管理。Todoの一連のデータ管理。
 import { TodosContext } from '../store/todos-context';
 
-// typescriptの基本的な考えは、どういう型のデータを返すのか、または関数に渡すのか(void)を
-// 厳格に定義すること。
-// NewTodoコンポーネントを考えるときは
-// onAddTodo関数にenteredText(文字列)を
-// 発動させるFC型(FC型はFunctionコンポーネントと言うこと)ということになる。
-
-// const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
 const NewTodo: React.FC = () => {
+  // TodoリストCtx取り出し
   const todosCtx = useContext(TodosContext);
+  // input.value取り出し用の変数。初期値はnull
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
+  // SubmitはReact.FormEvent
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
+    // useRefは変数名.current.valueで取り出す。!はnullやundefunedにしない。空なら空文字が返る
     const enteredText = todoTextInputRef.current!.value;
 
+    // 文字未入力の場合はそこで試合終了
     if (enteredText.trim().length === 0) {
       // throw an error
       return;
     }
 
-    // props.onAddTodo(enteredText);
+    // データをCtxのaddTodoに送る
     todosCtx.addTodo(enteredText);
   };
 
