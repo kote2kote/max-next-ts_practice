@@ -1,11 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import { TodosContext } from '../store/todos-context';
 
 // typescriptの基本的な考えは、どういう型のデータを返すのか、または関数に渡すのか(void)を
 // 厳格に定義すること。
 // NewTodoコンポーネントを考えるときは
 // onAddTodo関数にenteredText(文字列)を
 // 発動させるFC型(FC型はFunctionコンポーネントと言うこと)ということになる。
-const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
+
+// const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
+const NewTodo: React.FC = () => {
+  const todosCtx = useContext(TodosContext);
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = (event: React.FormEvent) => {
@@ -18,8 +22,8 @@ const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
       return;
     }
 
-    props.onAddTodo(enteredText);
-    // todosCtx.addTodo(enteredText);
+    // props.onAddTodo(enteredText);
+    todosCtx.addTodo(enteredText);
   };
 
   return (
