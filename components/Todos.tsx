@@ -12,7 +12,9 @@ import TodoItem from '../components/TodoItem';
 
 // const Todos: React.FC<{ items: string[] }> = (props) => {
 
-const Todos: React.FC<{ items: Todo[] }> = (props) => {
+const Todos: React.FC<{ items: Todo[]; onRemoveTodo: (id: string) => void }> = (
+  props,
+) => {
   // class Todoの追加による変更
   return (
     <ul>
@@ -23,7 +25,12 @@ const Todos: React.FC<{ items: Todo[] }> = (props) => {
         //   {item.text} | {item.id}
         // </li>
 
-        <TodoItem key={item.id} text={item.text} id={item.id} />
+        <TodoItem
+          key={item.id}
+          text={item.text}
+          id={item.id}
+          onRemoveTodo={props.onRemoveTodo.bind(null, item.id)}
+        />
       ))}
     </ul>
   );

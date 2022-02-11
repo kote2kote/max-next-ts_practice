@@ -23,11 +23,19 @@ const Index = () => {
       },
     );
   };
+
+  // Todo削除
+  const removeTodoHandler = (todoId: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== todoId);
+    });
+  };
+
   return (
     <div className="bg-gray-200">
       {/* <Todos items={['ラテのオシッコ片付ける', 'オレオの吐瀉物を片付ける']} /> */}
       <NewTodo onAddTodo={addTodoHandler} />
-      <Todos items={todos} />
+      <Todos items={todos} onRemoveTodo={removeTodoHandler} />
     </div>
   );
 };

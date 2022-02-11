@@ -1,6 +1,10 @@
-const TodoItem: React.FC<{ text: string; id: string }> = (props) => {
+const TodoItem: React.FC<{
+  text: string;
+  id: string;
+  onRemoveTodo: () => void;
+}> = (props) => {
   return (
-    <li>
+    <li onClick={props.onRemoveTodo}>
       {props.text} | {props.id}
     </li>
   );
